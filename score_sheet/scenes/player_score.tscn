@@ -1,0 +1,101 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0xmwhdwdei58"]
+
+[ext_resource type="Script" path="res://scripts/player_score.gd" id="1_gbadd"]
+[ext_resource type="FontFile" uid="uid://r1lyhe6vigvh" path="res://fonts/amatic-sc/AmaticSC-Bold.ttf" id="2_4hh7d"]
+[ext_resource type="Texture2D" uid="uid://kb2olakx4vs" path="res://sprites/minus_3.png" id="3_r5evu"]
+[ext_resource type="Texture2D" uid="uid://w8cae4i7yc5l" path="res://sprites/plus_3.png" id="4_0ysrd"]
+
+[node name="PlayerScore" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_gbadd")
+
+[node name="Score_label" type="LineEdit" parent="."]
+z_index = 2
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 70.0
+theme_override_colors/selection_color = Color(0, 0, 0, 1)
+theme_override_colors/caret_color = Color(0, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_colors/font_uneditable_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_4hh7d")
+theme_override_font_sizes/font_size = 45
+text = "0"
+alignment = 1
+editable = false
+
+[node name="Show_plus_and_minus_buttons" type="Button" parent="."]
+z_index = 2
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 70.0
+focus_mode = 0
+flat = true
+
+[node name="shader" type="ColorRect" parent="."]
+visible = false
+z_index = 2
+layout_mode = 0
+offset_top = -1.0
+offset_right = 240.0
+offset_bottom = 70.0
+color = Color(0.0901961, 0.0901961, 0.0901961, 0.784314)
+
+[node name="Minus_button" type="Button" parent="."]
+visible = false
+z_index = 2
+layout_mode = 0
+offset_left = 143.0
+offset_top = 6.0
+offset_right = 258.0
+offset_bottom = 117.0
+scale = Vector2(0.5, 0.5)
+icon = ExtResource("3_r5evu")
+flat = true
+
+[node name="Plus_button" type="Button" parent="."]
+visible = false
+z_index = 2
+layout_mode = 0
+offset_left = 40.0
+offset_top = 5.0
+offset_right = 156.0
+offset_bottom = 120.0
+scale = Vector2(0.5, 0.5)
+icon = ExtResource("4_0ysrd")
+flat = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+z_index = 2
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 70.0
+color = Color(0.303233, 0.303233, 0.303233, 1)
+
+[node name="change_score_label" type="LineEdit" parent="ColorRect"]
+z_index = 2
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 70.0
+theme_override_colors/selection_color = Color(0, 0, 0, 1)
+theme_override_colors/caret_color = Color(0, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_colors/font_uneditable_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_4hh7d")
+theme_override_font_sizes/font_size = 45
+alignment = 1
+editable = false
+
+[connection signal="text_submitted" from="Score_label" to="." method="_on_score_label_text_submitted"]
+[connection signal="pressed" from="Show_plus_and_minus_buttons" to="." method="_on_show_plus_and_minus_buttons_pressed"]
+[connection signal="pressed" from="Minus_button" to="." method="_on_minus_button_pressed"]
+[connection signal="pressed" from="Plus_button" to="." method="_on_plus_button_pressed"]
+[connection signal="text_submitted" from="ColorRect/change_score_label" to="." method="_on_change_score_label_text_submitted"]

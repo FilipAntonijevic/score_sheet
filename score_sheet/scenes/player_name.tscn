@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3 uid="uid://bwq3y1l4jb6kx"]
+
+[ext_resource type="Script" path="res://scripts/player_name.gd" id="1_y0qsk"]
+[ext_resource type="FontFile" uid="uid://r1lyhe6vigvh" path="res://fonts/amatic-sc/AmaticSC-Bold.ttf" id="2_20gs3"]
+[ext_resource type="Texture2D" uid="uid://dy2svcqt06fgy" path="res://sprites/pen.png" id="3_wya1s"]
+[ext_resource type="Texture2D" uid="uid://c6uqocc08cvla" path="res://sprites/trashcan.png" id="4_3maea"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ohw2x"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="PlayerName" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_y0qsk")
+
+[node name="name" type="LineEdit" parent="."]
+z_index = 2
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 70.0
+theme_override_colors/selection_color = Color(0, 0, 0, 1)
+theme_override_colors/caret_color = Color(0, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_colors/font_uneditable_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_20gs3")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxFlat_ohw2x")
+alignment = 1
+max_length = 16
+editable = false
+
+[node name="show_remove_and_edit_button" type="Button" parent="."]
+z_index = 2
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 70.0
+focus_mode = 0
+flat = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+z_index = 2
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 70.0
+color = Color(0.0901961, 0.0901961, 0.0901961, 0.784314)
+
+[node name="edit_player_name" type="Button" parent="."]
+visible = false
+z_index = 2
+layout_mode = 0
+offset_left = 49.0
+offset_top = 11.0
+offset_right = 487.0
+offset_bottom = 448.0
+scale = Vector2(0.11, 0.11)
+focus_mode = 0
+icon = ExtResource("3_wya1s")
+flat = true
+
+[node name="remove_player" type="Button" parent="."]
+visible = false
+z_index = 2
+layout_mode = 0
+offset_left = 145.0
+offset_top = 7.0
+offset_right = 369.0
+offset_bottom = 262.0
+scale = Vector2(0.21, 0.21)
+focus_mode = 0
+icon = ExtResource("4_3maea")
+flat = true
+
+[connection signal="text_submitted" from="name" to="." method="_on_name_text_submitted"]
+[connection signal="pressed" from="show_remove_and_edit_button" to="." method="_on_show_remove_and_edit_button_pressed"]
+[connection signal="pressed" from="edit_player_name" to="." method="_on_edit_player_name_pressed"]
+[connection signal="pressed" from="remove_player" to="." method="_on_remove_player_pressed"]

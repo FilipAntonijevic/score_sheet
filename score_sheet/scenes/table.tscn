@@ -1,0 +1,93 @@
+[gd_scene load_steps=7 format=3 uid="uid://q8lvskwesxru"]
+
+[ext_resource type="Script" path="res://scripts/table.gd" id="1_3ylhn"]
+[ext_resource type="Texture2D" uid="uid://cevs3wv24mw3h" path="res://sprites/table.png" id="1_f46ff"]
+[ext_resource type="FontFile" uid="uid://r1lyhe6vigvh" path="res://fonts/amatic-sc/AmaticSC-Bold.ttf" id="3_ehwho"]
+[ext_resource type="Texture2D" uid="uid://bg6ty34un0gie" path="res://sprites/plus_button.png" id="4_xwhdm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mxxsp"]
+font = ExtResource("3_ehwho")
+font_size = 50
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_oagq1"]
+font = ExtResource("3_ehwho")
+font_size = 36
+font_color = Color(0, 0, 0, 1)
+
+[node name="Table" type="Node2D"]
+script = ExtResource("1_3ylhn")
+
+[node name="Table" type="Sprite2D" parent="."]
+position = Vector2(240, 400)
+scale = Vector2(0.788177, 0.651997)
+texture = ExtResource("1_f46ff")
+
+[node name="Score" type="Label" parent="."]
+offset_left = 293.0
+offset_right = 429.0
+offset_bottom = 64.0
+text = "Score:"
+label_settings = SubResource("LabelSettings_mxxsp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="."]
+offset_left = 51.0
+offset_right = 187.0
+offset_bottom = 64.0
+text = "Name:"
+label_settings = SubResource("LabelSettings_mxxsp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+offset_top = 65.0
+offset_right = 480.0
+offset_bottom = 800.0
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+
+[node name="add_player_button" type="Button" parent="ScrollContainer/VBoxContainer/Control"]
+z_index = 2
+layout_mode = 0
+offset_left = 88.0
+offset_top = 10.0
+offset_right = 736.0
+offset_bottom = 566.0
+scale = Vector2(0.092, 0.092)
+focus_mode = 0
+text = "+"
+icon = ExtResource("4_xwhdm")
+flat = true
+
+[node name="Reset_button_label" type="Label" parent="ScrollContainer/VBoxContainer/Control"]
+z_index = 10
+layout_mode = 0
+offset_left = 316.0
+offset_top = 9.0
+offset_right = 416.0
+offset_bottom = 60.0
+text = "New  sheet"
+label_settings = SubResource("LabelSettings_oagq1")
+
+[node name="reset_game" type="Button" parent="ScrollContainer/VBoxContainer/Control"]
+z_index = 5
+layout_mode = 0
+offset_left = 308.0
+offset_top = 14.0
+offset_right = 1034.0
+offset_bottom = 288.0
+scale = Vector2(0.146, 0.146)
+focus_mode = 0
+flat = true
+
+[connection signal="gui_input" from="ScrollContainer" to="." method="_on_scroll_container_gui_input"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Control/add_player_button" to="." method="_on_add_player_button_pressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Control/reset_game" to="." method="_on_reset_game_pressed"]
