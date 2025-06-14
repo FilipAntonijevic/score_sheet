@@ -70,11 +70,11 @@ flat = true
 [node name="Reset_button_label" type="Label" parent="ScrollContainer/VBoxContainer/Control"]
 z_index = 10
 layout_mode = 0
-offset_left = 316.0
-offset_top = 9.0
-offset_right = 416.0
-offset_bottom = 60.0
-text = "New  sheet"
+offset_left = 308.0
+offset_top = 11.0
+offset_right = 415.0
+offset_bottom = 62.0
+text = "Reset  score"
 label_settings = SubResource("LabelSettings_oagq1")
 
 [node name="reset_game" type="Button" parent="ScrollContainer/VBoxContainer/Control"]

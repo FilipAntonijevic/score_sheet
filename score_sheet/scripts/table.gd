@@ -18,10 +18,11 @@ func _on_remove_this_player(player: Player) -> void:
 
 func _on_reset_game_pressed() -> void:
 	var count = container.get_child_count()
-
+	
 	for i in range(0, count - 1):
 		var child = container.get_child(i)
-		child.queue_free()
+		child.player_score.score = 0
+		child.player_score.score_label.text = "0"
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
