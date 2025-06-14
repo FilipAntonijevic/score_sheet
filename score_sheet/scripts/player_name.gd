@@ -9,6 +9,8 @@ extends Control
 var player_name = ""
 var focused := false
 
+var editing := true
+
 signal remove_this_player()
 
 func _ready() -> void:
@@ -19,24 +21,27 @@ func _ready() -> void:
 	name_label.add_theme_stylebox_override("read_only", style)
 	
 func _on_show_remove_and_edit_button_pressed() -> void:
-	if unfocus_other_areas():
-		if focused or GlobalInfo.focused_area == null:
-			show_remove_and_edit_button.hide()
-			remove_button.show()
-			edit_button.show()
-			shader.show()
-			focus()
+	if editing == false:
+		if unfocus_other_areas():
+			if focused or GlobalInfo.focused_area == null:
+				show_remove_and_edit_button.hide()
+				remove_button.show()
+				edit_button.show()
+				shader.show()
+				focus()
 
 func _on_edit_player_name_pressed() -> void:
 	if unfocus_other_areas():
 		if focused or GlobalInfo.focused_area == null:
+			editing = true
 			remove_button.hide()
 			edit_button.hide()
 			shader.hide()
 			name_label.editable = true
 			name_label.grab_focus()
 			focus()
-
+			name_label.grab_focus()
+			
 func _on_remove_player_pressed() -> void:
 	if unfocus_other_areas():
 		if focused or GlobalInfo.focused_area == null:
@@ -45,8 +50,6 @@ func _on_remove_player_pressed() -> void:
 		
 func _on_name_text_submitted(new_text: String) -> void:
 	player_name = new_text
-	name_label.editable = false
-	show_remove_and_edit_button.show()
 	unfocus()
 
 func unfocus() -> void:
@@ -55,6 +58,7 @@ func unfocus() -> void:
 	remove_button.hide()
 	edit_button.hide()
 	shader.hide()
+	editing = false
 	focused = false
 	GlobalInfo.focused_area = null
 

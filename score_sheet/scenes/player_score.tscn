@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c0xmwhdwdei58"]
 
-[ext_resource type="Script" path="res://scripts/player_score.gd" id="1_gbadd"]
+[ext_resource type="Script" uid="uid://d33hpnuht38i5" path="res://scripts/player_score.gd" id="1_gbadd"]
 [ext_resource type="FontFile" uid="uid://r1lyhe6vigvh" path="res://fonts/amatic-sc/AmaticSC-Bold.ttf" id="2_4hh7d"]
 [ext_resource type="Texture2D" uid="uid://kb2olakx4vs" path="res://sprites/minus_3.png" id="3_r5evu"]
 [ext_resource type="Texture2D" uid="uid://w8cae4i7yc5l" path="res://sprites/plus_3.png" id="4_0ysrd"]
@@ -15,7 +15,6 @@ z_index = 2
 layout_mode = 0
 offset_right = 240.0
 offset_bottom = 70.0
-theme_override_colors/selection_color = Color(0, 0, 0, 1)
 theme_override_colors/caret_color = Color(0, 0, 0, 1)
 theme_override_colors/font_placeholder_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -27,6 +26,7 @@ theme_override_font_sizes/font_size = 45
 text = "0"
 alignment = 1
 editable = false
+virtual_keyboard_type = 2
 
 [node name="Show_plus_and_minus_buttons" type="Button" parent="."]
 z_index = 2
@@ -93,6 +93,7 @@ theme_override_fonts/font = ExtResource("2_4hh7d")
 theme_override_font_sizes/font_size = 45
 alignment = 1
 editable = false
+virtual_keyboard_type = 2
 
 [connection signal="text_submitted" from="Score_label" to="." method="_on_score_label_text_submitted"]
 [connection signal="pressed" from="Show_plus_and_minus_buttons" to="." method="_on_show_plus_and_minus_buttons_pressed"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://xyojcxdnea3d"]
 
 [ext_resource type="PackedScene" uid="uid://bwq3y1l4jb6kx" path="res://scenes/player_name.tscn" id="1_7slir"]
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_nn1ec"]
+[ext_resource type="Script" uid="uid://clrarblq5ccso" path="res://scripts/player.gd" id="1_nn1ec"]
 [ext_resource type="PackedScene" uid="uid://c0xmwhdwdei58" path="res://scenes/player_score.tscn" id="2_mw11q"]
 
 [node name="Player" type="Control"]

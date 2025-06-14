@@ -10,6 +10,7 @@ func _on_add_player_button_pressed() -> void:
 	container.add_child(player)
 	player.player_name.name_label.editable = true
 	player.player_name.name_label.grab_focus()
+	player.player_name.focus()
 	player.connect("remove_this_player", Callable(self, "_on_remove_this_player"))
 	container.move_child(control, container.get_child_count() - 1)
 

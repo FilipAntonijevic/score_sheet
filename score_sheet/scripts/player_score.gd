@@ -10,12 +10,14 @@ class_name Player_score extends Control
 @onready var change_score = $ColorRect
 @onready var change_score_label = $ColorRect/change_score_label
 
-var score: float  = 0
+var editing = false
+
+var score: int  = 0
 var focused := false
 var operation = ""
 
 var press_start_time  := 0.0
-var long_press_threshold  := 0.5
+var long_press_threshold  := 0.3
 
 func _ready():
 	var style = StyleBoxFlat.new()
@@ -28,7 +30,7 @@ func _ready():
 	change_score_label.add_theme_stylebox_override("focus", style)
 	change_score_label.add_theme_stylebox_override("read_only", style)
 	show_plus_and_minus_button.connect("gui_input", _on_show_plus_and_minus_button_gui_input)
-
+	
 func _on_show_plus_and_minus_button_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -41,22 +43,25 @@ func _on_show_plus_and_minus_button_gui_input(event: InputEvent) -> void:
 				_on_short_press()
 				
 func _on_short_press() -> void:
-	if unfocus_other_areas():
-		if focused or GlobalInfo.focused_area == null:
-			show_plus_and_minus_button.hide()
-			plus_button.show()
-			minus_button.show()
-			shader.show()
-			focus()
+	if editing == false:
+		if unfocus_other_areas():
+			if focused or GlobalInfo.focused_area == null:
+				show_plus_and_minus_button.hide()
+				plus_button.show()
+				minus_button.show()
+				shader.show()
+				focus()
 		
 func _on_long_press() -> void:
 	if unfocus_other_areas():
 		if focused or GlobalInfo.focused_area == null:
+			editing = true
 			score_label.editable = true
-			score_label.grab_focus()
-			score_label.caret_column = score_label.text.length() 
 			focus()
-		
+			score_label.release_focus()
+			score_label.grab_focus()
+			score_label.select_all()
+
 func _on_plus_button_pressed() -> void:
 	if unfocus_other_areas():
 		if focused or GlobalInfo.focused_area == null:
@@ -84,11 +89,12 @@ func _on_minus_button_pressed() -> void:
 			focus()
 		
 func _on_change_score_label_text_submitted(_new_text: String) -> void:
+	score = int(score_label.text)
 	change_score.hide()
 	if operation == "plus":
-		score += float(change_score_label.text)
+		score += int(change_score_label.text)
 	else:
-		score -= float(change_score_label.text)
+		score -= int(change_score_label.text)
 	change_score_label.text = ""
 	score_label.set_text(str(score))
 	minus_button.hide()
@@ -96,20 +102,21 @@ func _on_change_score_label_text_submitted(_new_text: String) -> void:
 	show_plus_and_minus_button.show()
 	unfocus()
 
-
 func _on_score_label_text_submitted(new_text: String) -> void:
-	score = float(new_text)
-	score_label.editable = false
+	score = int(new_text)
 	unfocus()
 
 func unfocus() -> void:
-	score_label.editable = false
+	if GlobalInfo.focused_area == self:
+		score_label.editable = false
 	show_plus_and_minus_button.show()
 	plus_button.hide()
 	minus_button.hide()
 	change_score_label.text = ""
 	change_score.hide()
 	shader.hide()
+	score_label.select(0, 0)
+	editing = false
 	focused = false
 	GlobalInfo.focused_area = null
 	
