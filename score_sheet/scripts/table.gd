@@ -4,6 +4,8 @@ extends Node2D
 @onready var control = $ScrollContainer/VBoxContainer/Control
 
 func _on_add_player_button_pressed() -> void:
+	if GlobalInfo.focused_area != null:
+		GlobalInfo.focused_area.unfocus()
 	var player_scene = load("res://scenes/player.tscn")
 	var player = player_scene.instantiate()
 	
@@ -11,6 +13,7 @@ func _on_add_player_button_pressed() -> void:
 	player.player_name.name_label.editable = true
 	player.player_name.name_label.grab_focus()
 	player.player_name.focus()
+	GlobalInfo.focused_area = player.player_name
 	player.connect("remove_this_player", Callable(self, "_on_remove_this_player"))
 	container.move_child(control, container.get_child_count() - 1)
 

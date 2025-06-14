@@ -34,14 +34,14 @@ func _on_edit_player_name_pressed() -> void:
 	if unfocus_other_areas():
 		if focused or GlobalInfo.focused_area == null:
 			editing = true
+			name_label.editable = true
 			remove_button.hide()
 			edit_button.hide()
 			shader.hide()
-			name_label.editable = true
-			name_label.grab_focus()
 			focus()
+			name_label.release_focus()
 			name_label.grab_focus()
-			
+
 func _on_remove_player_pressed() -> void:
 	if unfocus_other_areas():
 		if focused or GlobalInfo.focused_area == null:
